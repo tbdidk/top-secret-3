@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>valentines</title>
+    
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html>
+<head>
+  <title>Valentine?</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Comic Sans MS', cursive;
+      background-color: #ffe6f0;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .screen {
+      display: none;
+      width: 100vw;
+      height: 100vh;
+      position: absolute;
+      top: 0;
+      left: 0;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .screen.active {
+      display: flex;
+    }
+
+    h1 {
+      font-size: 36px;
+      color: #ff4d88;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 28px;
+      color: #ff1a75;
+      margin-bottom: 40px;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 22px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin: 10px;
+      transition: all 0.3s ease;
+    }
+
+    img.gif {
+      border-radius: 15px;
+      max-width: 80vw;
+      max-height: 60vh;
+      margin-top: 20px;
+    }
+
+    #fancyText {
+      font-size: 26px;
+      color: #cc0066;
+      margin-bottom: 20px;
+    }
+
+    #messageText {
+      font-size: 22px;
+      max-width: 80vw;
+      color: #ff1a75;
+      line-height: 1.5;
+      cursor: pointer;
+    }
+
+    #confettiText {
+      font-size: 60px;
+      color: #cc0000;
+      margin-bottom: 20px;
+    }
+
+    #yayGif {
+      width: 320px;
+      border-radius: 15px;
+      margin-top: 20px;
+    }
+
+    .confetti {
+      position: absolute;
+      border-radius: 3px;
+      opacity: 0.9;
+      pointer-events: none;
+      animation: confettiFall linear forwards;
+    }
+
+    @keyframes confettiFall {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- SCREEN 1 -->
+<div id="screen1" class="screen active">
+  <h1>Hi Meme !!! My Missssster 💕</h1>
+  <h2>WILL YOU BE MY VALENTINE? 💌</h2>
+  <div>
+    <button onclick="nextScreen(2)">Yes 💖</button>
+    <button id="no" onmouseover="moveNo()">No 🙃</button>
+  </div>
+</div>
+
+<!-- SCREEN 2 — MICHAEL SCOTT -->
+<div id="screen2" class="screen">
+  <div id="fancyText">
+    I am ineffably delighted by this serendipitous outcome<br>
+   You are officially my Valentine!!!💘
+  </div>
+
+  <img class="gif"
+       src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3bmVoNW05MmFsMXBlcGZ5YnpjbXpnbWtiNWcyN3JjNmRpcXZmN2phdCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/P9sGDIowyf7PYyymmn/giphy.gif"
+       alt="Michael Scott Crying">
+
+  <div style="margin-top:20px; font-size:20px; color:#ff4d88; cursor:pointer;"
+       onclick="nextScreen(3)">
+    CLICK ME! 💌
+  </div>
+</div>
+
+<!-- SCREEN 3 -->
+<div id="screen3" class="screen">
+  <div id="messageText" onclick="nextScreen(4)">
+    My Meme 🥰<br><br>
+    I am so so lucky to have hubbycakes like you 💕
+    and so lucky that I get to celebrate this and many more Valentine’s Days
+    for eneternity ♾️💖
+    <br><br>
+    You make me the most luckiest wifey ever in this universe 🌍✨
+    You are my everything, my Bebe 🐻💞
+    and I love you tons and tons for forever and always endlessly!!
+    <br><br>
+    ❤️🥹💘🫶✨<br><br>
+    (CLICK ME!!)
+  </div>
+</div>
+
+<!-- SCREEN 4 -->
+<div id="screen4" class="screen">
+  <div id="confettiText">YAYYYYYYYYYYYY 🎉🎉🎉</div>
+  <img id="yayGif"
+       src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcnJ0MGF3aDh3bDM0eDBqbGRyM3Y0NHlwZW83dmt6OHpsNHl5NGVkbSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/WZklEzvRrAtncnHqnB/giphy.gif"
+       alt="Final Love GIF">
+</div>
+
+<script>
+  function moveNo() {
+    const noBtn = document.getElementById("no");
+    const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+    const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+    noBtn.style.position = "absolute";
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+  }
+
+  function nextScreen(num) {
+    document.querySelectorAll(".screen")
+      .forEach(s => s.classList.remove("active"));
+
+    document.getElementById("screen" + num)
+      .classList.add("active");
+
+    if (num === 4) startConfetti();
+  }
+
+  function startConfetti() {
+    const screen = document.getElementById("screen4");
+    const reds = ["#ff0000", "#cc0000", "#ff3333", "#b30000", "#990000"];
+
+    for (let i = 0; i < 220; i++) {
+      const c = document.createElement("div");
+      c.className = "confetti";
+      c.style.backgroundColor = reds[Math.floor(Math.random() * reds.length)];
+      c.style.left = Math.random() * window.innerWidth + "px";
+      c.style.top = Math.random() * -400 + "px";
+      c.style.width = (Math.random() * 10 + 6) + "px";
+      c.style.height = (Math.random() * 10 + 6) + "px";
+      c.style.animationDuration = (3 + Math.random() * 3) + "s";
+      screen.appendChild(c);
+    }
+  }
+</script>
+
+</body>
+</html>
+    
+  </body>
+  
+</html>
